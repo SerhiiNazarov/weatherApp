@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
 
-function App() {
+import { useDispatch } from "react-redux";
+import { CardList } from "./components/CardList";
+import { Autocomlete } from "./components/Autocomlete";
+import { Container } from "./components/Container";
+import { LanguageSelect } from "./components/LanguageSelect";
+import { getBrowserLocation } from "./utils/geo";
+import { fetchCurrentWeather } from "./redux/weather/weatherOperations";
+import { addCityList } from "./redux/weather/weatherOperations";
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getBrowserLocation()
+      .then((location) => {
+        const localValue = JSON.parse(
+          window.localStorage.getItem("currentLocation")
+        );
+        if (localValue === null && localValue !== location) {
+          window.localStorage.setItem(
+            "currentLocation",
+            JSON.stringify(location)
+          );
+          dispatch(fetchCurrentWeather(location));
+        }
+      })
+      .catch(() => {
+        console.log("Error");
+      });
+  }, [dispatch]);
+
+  const localValue = JSON.parse(window.localStorage.getItem("weatherList"));
+  if (localValue !== null && localValue.length !== 0) {
+    dispatch(addCityList(localValue));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <LanguageSelect />
+      <Autocomlete />
+      <CardList />
+    </Container>
   );
-}
+};
 
 export default App;

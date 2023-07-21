@@ -86,7 +86,7 @@ const WeatherCard = ({ weatherData }) => {
             src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
             alt="weather icon"
           />
-          <Description>{weatherData.weather[0].main}</Description>
+          <Description>{weatherData.weather[0].description}</Description>
         </DescriptionContainer>
         <CloseBtn type="button" onClick={onClickDeleteBtn}>
           <CloseOutlined />

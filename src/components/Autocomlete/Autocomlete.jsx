@@ -42,7 +42,7 @@ const Autocomlete = () => {
   };
 
   const onClickAddBtn = () => {
-    if (value !== "" && selectCity) {
+    if (value !== "") {
       dispatch(addCityWeather({ value }));
     }
     setSelectCity(false);

@@ -19,6 +19,7 @@ const Autocomlete = () => {
     id: "google-map-script",
     googleMapsApiKey: API_KEY,
     libraries,
+    authReferrerPolicy: "origin",
   });
 
   const {

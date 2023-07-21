@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Graph } from "../Graph";
 import {
@@ -28,42 +28,46 @@ import { CloseOutlined } from "@ant-design/icons";
 import { deleteCard, changeUnits } from "../../redux/weather/weatherOperations";
 import DateObject from "react-date-object";
 import { useTranslation } from "react-i18next";
+import { useLocalStorage } from "../../utils/useLocalStorage";
 
 const WeatherCard = ({ weatherData }) => {
-  const [selectUnits, setSelectUnits] = useState("metric");
+  const localValue = JSON.parse(window.localStorage.getItem("unitsList"));
+  const id = weatherData.id;
+
+  const [selectUnits, setSelectUnits] = useState(useLocalStorage(id));
+
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const localValue = JSON.parse(window.localStorage.getItem("unitsList"));
   if (localValue === null) {
     window.localStorage.setItem(
       "unitsList",
-      JSON.stringify({ [weatherData.id]: "metric" })
+      JSON.stringify({ [id]: "metric" })
     );
   }
 
-  useEffect(() => {
-    setSelectUnits(localValue[weatherData.id]);
-  }, [localValue, weatherData.id]);
-
-  useEffect(() => {
-    if (localValue !== null) {
-      localValue[weatherData.id] = selectUnits;
+  if (localValue !== null) {
+    const ArrLocal = Object.keys(localValue);
+    const indexKey = ArrLocal.findIndex((el) => Number(el) === id);
+    if (indexKey === -1) {
+      localValue[id] = selectUnits;
       window.localStorage.setItem("unitsList", JSON.stringify(localValue));
     }
-  }, [selectUnits, localValue, weatherData.id]);
+  }
 
   const onClickDeleteBtn = () => {
     dispatch(deleteCard(weatherData.id));
+    delete localValue[weatherData.id];
+    window.localStorage.setItem("unitsList", JSON.stringify(localValue));
   };
 
   const handleUnitsChange = (e) => {
     const units = e.currentTarget.name;
     if (units !== selectUnits) {
+      localValue[id] = units;
       setSelectUnits(units);
       const value = weatherData.name;
       dispatch(changeUnits({ value, units }));
-      localValue[weatherData.id] = units;
       window.localStorage.setItem("unitsList", JSON.stringify(localValue));
     }
   };

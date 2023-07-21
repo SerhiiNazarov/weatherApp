@@ -47,6 +47,7 @@ const weatherSlice = createSlice({
       };
     },
     [addCityWeather.rejected]: (state, { payload }) => {
+      console.log(payload);
       return {
         ...state,
         error: payload,

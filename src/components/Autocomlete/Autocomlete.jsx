@@ -16,10 +16,9 @@ const Autocomlete = () => {
   const { t } = useTranslation();
 
   const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
+    id: "weatherapp-393513",
     googleMapsApiKey: API_KEY,
     libraries,
-    authReferrerPolicy: "origin",
   });
 
   const {

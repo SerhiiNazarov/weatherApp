@@ -7,7 +7,7 @@ import useOnclickOutside from "react-cool-onclickoutside";
 import { useTranslation } from "react-i18next";
 import { Wraper, Input, Suggestions, Item, Btn } from "./Autocomlete.styled";
 
-const API_KEY = REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY;
 const libraries = ["places"];
 
 const Autocomlete = () => {

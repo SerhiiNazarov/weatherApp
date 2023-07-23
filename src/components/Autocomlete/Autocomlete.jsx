@@ -30,7 +30,7 @@ const Autocomlete = () => {
     clearSuggestions,
   } = usePlacesAutocomplete({
     initOnMount: false,
-    debounce: 500,
+    debounce: 400,
   });
   const ref = useOnclickOutside(() => {
     clearSuggestions();

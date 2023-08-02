@@ -7,6 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 350px;
+  height: 258px;
   padding-top: 10px;
   padding-left: 15px;
   padding-right: 15px;
@@ -33,6 +34,7 @@ export const DateTxt = styled.p`
 `;
 
 export const UpperSectionContainer = styled.div`
+  height: 55px;
   display: flex;
   justify-content: space-between;
 `;

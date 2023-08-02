@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addCityWeather } from "../../redux/weather/weatherOperations";
 import { useJsApiLoader } from "@react-google-maps/api";
 import usePlacesAutocomplete from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 import { useTranslation } from "react-i18next";
+
 import { Wraper, Input, Suggestions, Item, Btn } from "./Autocomlete.styled";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const libraries = ["places"];
 
-const Autocomlete = () => {
-  const [selectCity, setSelectCity] = useState(false);
+export const Autocomlete = () => {
   const dispatch = useDispatch();
+
   const { t } = useTranslation();
 
   const { isLoaded } = useJsApiLoader({
@@ -42,9 +43,10 @@ const Autocomlete = () => {
 
   const onClickAddBtn = () => {
     if (value !== "") {
-      dispatch(addCityWeather({ value }));
+      const lang = JSON.parse(window.localStorage.getItem("currentLanguage"));
+      dispatch(addCityWeather({ value, lang }));
     }
-    setSelectCity(false);
+
     setValue("");
   };
 
@@ -53,7 +55,6 @@ const Autocomlete = () => {
     () => {
       setValue(description, false);
       clearSuggestions();
-      setSelectCity(true);
     };
 
   const renderSuggestions = () =>
@@ -92,5 +93,3 @@ const Autocomlete = () => {
     </Wraper>
   );
 };
-
-export { Autocomlete };

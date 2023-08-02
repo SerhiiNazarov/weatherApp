@@ -16,13 +16,17 @@ const CardList = () => {
   }, [weather]);
 
   return (
-    <Wraper>
-      {weather ? (
-        weather.map((item) => <WeatherCard key={item.id} weatherData={item} />)
-      ) : (
-        <p>Loading...</p>
-      )}
-    </Wraper>
+    <>
+      <Wraper>
+        {weather ? (
+          weather.map((item) => (
+            <WeatherCard key={item.id} weatherData={item} />
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
+      </Wraper>
+    </>
   );
 };
 

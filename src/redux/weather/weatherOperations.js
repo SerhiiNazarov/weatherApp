@@ -58,3 +58,20 @@ export const changeUnits = createAsyncThunk(
     }
   }
 );
+
+export const changeLanguage = createAsyncThunk(
+  "weathers/changeLanguage",
+  async (value, { rejectWithValue }) => {
+    try {
+      const newWeatherList = await value.weather.map((item) =>
+        weatherData({ value: item.name, lang: value.lang })
+      );
+
+      const weather = await Promise.all(newWeatherList);
+
+      return weather;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

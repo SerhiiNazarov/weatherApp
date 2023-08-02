@@ -5,6 +5,7 @@ import {
   deleteCard,
   changeUnits,
   addCityList,
+  changeLanguage,
 } from "./weatherOperations";
 
 const initialState = {
@@ -47,7 +48,6 @@ const weatherSlice = createSlice({
       };
     },
     [addCityWeather.rejected]: (state, { payload }) => {
-      console.log(payload);
       return {
         ...state,
         error: payload,
@@ -108,6 +108,24 @@ const weatherSlice = createSlice({
       };
     },
     [addCityList.rejected]: (state, { payload }) => {
+      return {
+        ...state,
+        error: payload,
+      };
+    },
+    [changeLanguage.pending]: (state) => {
+      return {
+        ...state,
+        error: null,
+      };
+    },
+    [changeLanguage.fulfilled]: (state, { payload }) => {
+      return {
+        ...state,
+        weather: payload,
+      };
+    },
+    [changeLanguage.rejected]: (state, { payload }) => {
       return {
         ...state,
         error: payload,

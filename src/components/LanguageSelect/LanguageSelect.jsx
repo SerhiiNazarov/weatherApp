@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import i18n from "i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { changeLanguage } from "../../redux/weather/weatherOperations";
+import { getWeatherData } from "../../redux/weather/weatherSelectors";
 
 import { Container, Select, Option, Icon } from "./LanguageSelect.js";
 
 const LanguageSelect = () => {
   const [language, setLanguage] = useState("en");
+  const dispatch = useDispatch();
+  const weather = useSelector(getWeatherData);
   const localValue = JSON.parse(window.localStorage.getItem("currentLanguage"));
 
   useEffect(() => {
@@ -15,12 +20,11 @@ const LanguageSelect = () => {
   }, [localValue]);
 
   const handleChangeLanguage = (e) => {
-    i18n.changeLanguage(e.target.value);
-    setLanguage(e.target.value);
-    window.localStorage.setItem(
-      "currentLanguage",
-      JSON.stringify(e.target.value)
-    );
+    const lang = e.target.value;
+    i18n.changeLanguage(lang);
+    setLanguage(language);
+    dispatch(changeLanguage({ weather, lang }));
+    window.localStorage.setItem("currentLanguage", JSON.stringify(lang));
   };
 
   return (

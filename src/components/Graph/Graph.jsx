@@ -20,7 +20,6 @@ const Graph = ({ data, temp }) => {
         label: "forecast",
         backgroundColor: `${isWarmWeather(temp)}`,
         data: data.map((item) => item.main.temp),
-        color: "red",
       },
     ],
   };

@@ -25,13 +25,13 @@ export const currentWeatherData = async ({
 
 export const weatherData = async ({ value, units = "metric", lang = "en" }) => {
   const { data } = await axios.get(
-    `${BASE_URL}weather?q=${value}&units=${units}&appid=${API_KEY}`
+    `${BASE_URL}weather?q=${value}&units=${units}&appid=${API_KEY}&lang=${lang}`
   );
 
   const {
     data: { list },
   } = await axios.get(
-    `${BASE_URL}forecast?q=${value}&units=${units}&appid=${API_KEY}&lang=${lang}`
+    `${BASE_URL}forecast?q=${value}&units=${units}&appid=${API_KEY}`
   );
 
   let sliceList = list.slice(1, 9);

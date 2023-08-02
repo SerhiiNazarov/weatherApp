@@ -3,11 +3,10 @@ import styled from "styled-components";
 export const Container = styled.div`
   position: relative;
   display: flex;
+  box-sizing: content-box;
   flex-direction: column;
   justify-content: space-between;
-  box-sizing: border-box;
   width: 350px;
-  height: 257px;
   padding-top: 10px;
   padding-left: 15px;
   padding-right: 15px;
@@ -43,6 +42,7 @@ export const DescriptionContainer = styled.div`
 `;
 
 export const Description = styled.p`
+  max-height: 55px;
   font-size: 13px;
   line-height: 19px;
   font-weight: normal;
@@ -155,7 +155,6 @@ export const CloseBtn = styled.button`
 
 export const GrafContainer = styled.div`
   display: flex;
-  width: 320px;
   height: 100px;
   background: ${(props) => props.theme.bgGraph};
 `;

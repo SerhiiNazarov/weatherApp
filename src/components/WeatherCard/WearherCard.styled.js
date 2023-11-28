@@ -11,8 +11,7 @@ export const Container = styled.div`
   padding: 10px 15px;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 5px;
-  /* background: ${(props) => props.theme.background}; */
-  background: red;
+  background: ${(props) => props.theme.background};
 `;
 
 export const City = styled.p`

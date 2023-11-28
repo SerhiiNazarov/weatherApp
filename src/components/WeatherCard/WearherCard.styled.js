@@ -8,10 +8,7 @@ export const Container = styled.div`
   justify-content: space-between;
   width: 350px;
   height: auto;
-  padding-top: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 10px;
+  padding: 10px 15px;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 5px;
   background: ${(props) => props.theme.background};

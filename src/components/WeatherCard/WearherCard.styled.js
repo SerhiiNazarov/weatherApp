@@ -11,7 +11,8 @@ export const Container = styled.div`
   padding: 10px 15px;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 5px;
-  background: ${(props) => props.theme.background};
+  /* background: ${(props) => props.theme.background}; */
+  background: red;
 `;
 
 export const City = styled.p`
@@ -51,8 +52,8 @@ export const Description = styled.p`
 
 export const Icon = styled.img`
   margin-top: -15px;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 `;
 
 export const LowerSectionContainer = styled.div`
